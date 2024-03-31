@@ -4,6 +4,8 @@ import 'dotenv/config'
 import mongoose from 'mongoose';
 import { urlRouter } from './routes/url.js';
 import { urlController } from './dependencies/depen.js';
+import { userRouter } from './routes/user.js';
+
 
 const app = express()
 app.disable('x-powered-by')
@@ -25,4 +27,4 @@ app.listen(port, () => {
 app.get('/:code',urlController.getByCode)
 
 app.use('/urls',urlRouter)
-
+app.use('/user',userRouter)
