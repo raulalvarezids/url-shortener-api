@@ -3,6 +3,7 @@ import { json } from 'express';
 import 'dotenv/config'
 import mongoose from 'mongoose';
 import { urlRouter } from './routes/url.js';
+import { urlController } from './dependencies/depen.js';
 
 const app = express()
 app.disable('x-powered-by')
@@ -21,6 +22,7 @@ app.listen(port, () => {
     console.log('server up url ')
 });
 
+app.get('/:code',urlController.getByCode)
 
 app.use('/urls',urlRouter)
 

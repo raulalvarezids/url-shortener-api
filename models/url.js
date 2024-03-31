@@ -19,6 +19,10 @@ const UrlSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    code : {
+        type : String
+    }
+    ,
     user : {
         type: Schema.Types.ObjectId,
         ref:'User'

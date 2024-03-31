@@ -1,16 +1,21 @@
 import { urlModel } from "../models/url.js";
+import ShortUniqueId from 'short-unique-id'
 
 export class UrlRepository {
 
     async getAll() {
-        const data = await urlModel.find()       
-        return data        
+        const data = await urlModel.find()      
+        return data          
     }
 
     async createUrl(url){
-        const newnew = url+'nuevecita'
-        
-        const newUrl = urlModel({urlOld:url,urlNew:newnew})
+
+        const uid = new ShortUniqueId({ length: 8 });
+        const codeUrl = uid.rnd();        
+
+        const newShortUrl = process.env.HOSTURL+'/'+codeUrl
+
+        const newUrl = urlModel({urlOld:url,urlNew:newShortUrl,code:codeUrl})
         const resdata = await newUrl.save()
 
         return resdata
@@ -26,4 +31,17 @@ export class UrlRepository {
 
         return false
     }
+
+    async getByCode(code){
+        const urlLong = await urlModel.find({code:code})
+        
+        if(urlLong.length > 0) {
+            return urlLong[0]
+        }else{
+            return false
+        }
+
+    }
+
+    
 }   

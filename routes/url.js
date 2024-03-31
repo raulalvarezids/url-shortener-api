@@ -5,6 +5,6 @@ import { urlController } from '../dependencies/depen.js';
 export const urlRouter = Router()
 
 
-urlRouter.get('/',urlController.getAll);
+urlRouter.get('/getall',urlController.getAll);
 urlRouter.post('/',urlController.createUrl)
 urlRouter.delete('/',urlController.deleteById)
