@@ -50,5 +50,9 @@ export class UrlRepository {
 
     }
 
+    async getById (userId){
+        const data = await urlModel.find({user:userId})  
+        return data
+    }
     
 }   

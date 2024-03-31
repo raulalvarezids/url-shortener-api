@@ -9,7 +9,6 @@ userRouter.post('/',userController.createUser);
 userRouter.post('/login',userController.login)
 
 
-
 userRouter.get('/get',authenticate(),userController.getAll)
 
 // userRouter.post('/',urlController.createUrl)

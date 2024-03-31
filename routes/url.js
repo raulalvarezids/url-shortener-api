@@ -8,3 +8,4 @@ export const urlRouter = Router()
 urlRouter.get('/getall',urlController.getAll);
 urlRouter.post('/',authenticate(),urlController.createUrl)
 urlRouter.delete('/',authenticate(),urlController.deleteById)
+urlRouter.get('/getById',authenticate(),urlController.getById)

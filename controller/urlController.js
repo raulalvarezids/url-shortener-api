@@ -45,5 +45,15 @@ export class UrlController {
             return
         }
     }
+
+    getById = async (req,res) =>
+    {
+        
+        const userId = req.user.id
+
+        const urls = await this.urlRepository.getById(userId)
+
+        res.status(200).json(urls)
+    }
     
 }   
