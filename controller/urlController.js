@@ -11,12 +11,13 @@ export class UrlController {
 
     createUrl = async (req,res) =>
     {
-        const {url} = req.body
-        const newUrl = await this.urlRepository.createUrl(url)
+        const {url} = req.body                
+        const newUrl = await this.urlRepository.createUrl(url,req.user)
               
         res.status(200).json(newUrl.urlNew)
        
     }
+
 
     deleteById = async (req,res) => 
     {
@@ -29,6 +30,7 @@ export class UrlController {
             res.status(400).json(status)
         }        
     }
+
 
     getByCode = async (req,res) => 
     {

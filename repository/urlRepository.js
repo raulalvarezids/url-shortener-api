@@ -8,14 +8,21 @@ export class UrlRepository {
         return data          
     }
 
-    async createUrl(url){
+    async createUrl(url,user){
 
         const uid = new ShortUniqueId({ length: 8 });
         const codeUrl = uid.rnd();        
 
         const newShortUrl = process.env.HOSTURL+'/'+codeUrl
 
-        const newUrl = urlModel({urlOld:url,urlNew:newShortUrl,code:codeUrl})
+        let newUrl;
+        if(user == undefined){
+            newUrl = urlModel({urlOld:url,urlNew:newShortUrl,code:codeUrl})
+        }else{
+            newUrl = urlModel({urlOld:url,urlNew:newShortUrl,code:codeUrl,user:user.id})
+        }
+
+      
         const resdata = await newUrl.save()
 
         return resdata

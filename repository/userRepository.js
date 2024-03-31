@@ -28,8 +28,7 @@ export class UserRepository{
 
         const user = await userModel.findOne({email})        
         
-        if(user){
-            console.log(user)
+        if(user){            
             const checkPassword = await userModel.comparePassword(password, user.password)
 
             if(checkPassword){
