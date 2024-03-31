@@ -3,14 +3,14 @@ import {generateToken} from '../Auth/generateToken.js'
 
 export class UserRepository{
     
-    async createUser (email,password,first_name,last_name) {
+    async createUser (email,password,username) {
         
         const isNew = await userModel.userExist(email)        
 
         if (!isNew){
             
             const hashpassword = await userModel.encryptPassword(password)
-            const newUser = userModel({ first_name:first_name, last_name:last_name,email:email,password: hashpassword } )
+            const newUser = userModel({ username:username,email:email,password: hashpassword } )
             const resdata = await newUser.save()
 
             return {status:true,message:'Creado correctamente'}
@@ -35,8 +35,7 @@ export class UserRepository{
 
                 const userData = {
                     id : user._id,
-                    first_name:user.first_name,
-                    last_name: user.last_name
+                    username:user.username,                    
                 }
                 
                 const token = generateToken(userData)
@@ -44,11 +43,11 @@ export class UserRepository{
                 return {status:true,message:token}
 
             }else{
-                return {status:false,message:'Contraseña incorrecta'}
+                return {status:false,message:'wrong Password'}
             }
             
         }else{
-            return {status:false,message:'Correo no encontrado'}
+            return {status:false,message:'Email not found'}
         }
 
     }

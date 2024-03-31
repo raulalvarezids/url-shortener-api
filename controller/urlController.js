@@ -39,7 +39,7 @@ export class UrlController {
         const urlLong = await this.urlRepository.getByCode(code)
 
         if(urlLong == false){
-            res.status(404).send('Url no encontrada')            
+            res.status(404).send('Url not found')            
         }else{                        
             res.redirect(urlLong.urlOld)
             return

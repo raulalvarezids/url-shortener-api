@@ -6,12 +6,12 @@ export class UserController{
     }
 
     createUser = async (req,res) => {
-        const {email,password,first_name,last_name} = req.body
+        const {email,password,username} = req.body
      
-        const result = await this.userRepository.createUser(email,password,first_name,last_name)
+        const result = await this.userRepository.createUser(email,password,username)
 
         if (result.status){
-            res.status(200).json('creado')
+            res.status(200).json('User created')
             
         }else{
             res.status(400).json(result.message)
