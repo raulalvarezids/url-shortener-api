@@ -13,15 +13,11 @@ export class UserRepository{
             const newUser = userModel({ username:username,email:email,password: hashpassword } )
             const resdata = await newUser.save()
 
-            return {status:true,message:'Creado correctamente'}
+            return {status:true,message:'Successfully created'}
         }else{
-            return {status:false, message:'user exist'}
+            return {status:false, message:'Email alrady exist'}
         }        
 
-    }
-    async getAll(){
-        const data = await userModel.find()      
-        return data        
     }
 
     async login(email,password){
@@ -39,8 +35,12 @@ export class UserRepository{
                 }
                 
                 const token = generateToken(userData)
+                const dataSend = {
+                    username:user.username,
+                    token: token
+                }
 
-                return {status:true,message:token}
+                return {status:true,message:dataSend}
 
             }else{
                 return {status:false,message:'wrong Password'}
@@ -51,4 +51,6 @@ export class UserRepository{
         }
 
     }
+
+   
 }

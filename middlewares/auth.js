@@ -6,7 +6,7 @@ export const authenticate = () => (req, res, next) => {
     
     if (token) {
         token = token.split(' ')        
-                
+        
         if(token[1] == 'invitado'){            
             next();
         }else{

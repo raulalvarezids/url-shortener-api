@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import { urlRouter } from './routes/url.js';
 import { urlController } from './dependencies/depen.js';
 import { userRouter } from './routes/user.js';
-
+import cors from 'cors'
 
 const app = express()
 app.disable('x-powered-by')
@@ -19,6 +19,8 @@ const url = process.env.URLMONGO
 mongoose.connect(url)
     .then(() => console.log("conectado a la base de datos"))
     .catch((error)=> console.log("error" + error));    
+
+app.use(cors('*'))
 
 app.listen(port, () => {
     console.log('server up url ')

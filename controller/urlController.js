@@ -14,20 +14,19 @@ export class UrlController {
         const {url} = req.body                
         const newUrl = await this.urlRepository.createUrl(url,req.user)
               
-        res.status(200).json(newUrl.urlNew)
-       
+        res.status(200).json(newUrl.urlNew)       
     }
 
 
     deleteById = async (req,res) => 
     {
-        const {id} = req.body
+        const id = req.params.id
         const status = await this.urlRepository.deleteById(id)
         
         if(status){
-            res.status(200).json(status)
+            res.status(200).json('Delete Successfully')
         }else{
-            res.status(400).json(status)
+            res.status(400).json('Error Deleting')
         }        
     }
 
@@ -47,13 +46,28 @@ export class UrlController {
     }
 
     getById = async (req,res) =>
-    {
-        
-        const userId = req.user.id
-
-        const urls = await this.urlRepository.getById(userId)
-
+    {           
+        const id = req.user.id        
+        const urls = await this.urlRepository.getById(id)
         res.status(200).json(urls)
     }
-    
+
+
+    getByUrlCode = async (req,res) => {
+        const code = req.params.code
+        const url = await  this.urlRepository.getByUrlCode(code)
+        res.status(200).json(url)
+    }
+
+    updateById = async (req,res) => {
+        const {id,name,urlOld} = req.body    
+        const status = await this.urlRepository.updateById(id,name,urlOld)
+        
+        if(status){
+            res.status(200).json('Update Successfully')
+        }else{
+            res.status(400).json('Error updating')
+        }
+    }
+        
 }   
